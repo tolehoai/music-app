@@ -20,7 +20,7 @@ function App() {
         return data;
       } catch (err) {
         // Handle Error Here
-        console.error(err);
+        console.error("Error  :   ", err);
       }
     };
     const musics = getData();
