@@ -7,6 +7,7 @@ import PauseIcon from "@material-ui/icons/Pause";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import { Typography } from "@material-ui/core";
+import { useRef } from "react";
 
 Music.propTypes = { musics: PropTypes.object };
 
@@ -16,6 +17,26 @@ Music.defaultProps = {
 
 function Music(props) {
   const { musics } = props;
+
+  const index = useRef(0);
+
+  useEffect(() => {
+    var audio = document.getElementById("music");
+    audio.addEventListener("ended", function () {
+      console.log("END SONG, NEXT SONG");
+      const newCurrentMusic = {
+        url: musics.top100_AM[1].songs[index.current + 1].music,
+        index: index.current + 1,
+      };
+      index.current = index.current + 1;
+      setCurrentMusic(newCurrentMusic);
+      const newPlay = {
+        isPlay: true,
+        title: "Pause",
+      };
+      setPlay(newPlay);
+    });
+  }, []);
 
   const [currentMusic, setCurrentMusic] = useState({
     url: musics.top100_AM[1].songs[0].music,
@@ -67,15 +88,18 @@ function Music(props) {
         url: musics.top100_AM[1].songs[0].music,
         index: 0,
       };
+      index.current = 0;
       setCurrentMusic(newCurrentMusic);
     } else {
       const newCurrentMusic = {
         url: musics.top100_AM[1].songs[musicIndex - 1].music,
         index: musicIndex - 1,
       };
+      index.current = index.current - 1;
+
       setCurrentMusic(newCurrentMusic);
     }
-
+    console.log(index.current);
     const newPlay = {
       isPlay: true,
       title: "Pause",
@@ -87,16 +111,19 @@ function Music(props) {
     if (currentMusic.index > 99) {
       const newCurrentMusic = {
         url: musics.top100_AM[1].songs[99].music,
-        index: 0,
+        index: 99,
       };
+      index.current = 99;
       setCurrentMusic(newCurrentMusic);
     } else {
       const newCurrentMusic = {
         url: musics.top100_AM[1].songs[musicIndex + 1].music,
         index: musicIndex + 1,
       };
+      index.current = index.current + 1;
       setCurrentMusic(newCurrentMusic);
     }
+    console.log(index.current);
 
     const newPlay = {
       isPlay: true,
