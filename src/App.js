@@ -1,13 +1,7 @@
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import axios from "axios";
+import { makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Loading from "../src/components/Loading";
 import Music from "../src/components/Music";
-
 function App() {
   const musics = {
     sourceUrl: "https://nhaccuatui.com",
@@ -22845,23 +22839,34 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const res = await axios.get(apiURL);
-        const { data } = await res;
-        setMusicList(data);
-        setLoading(false);
-        return data;
-      } catch (err) {
-        // Handle Error Here
-        console.error("Error  :   ", err);
-      }
+      await setMusicList(musics);
+      await setLoading(false);
+      //Set hard code
+      // try {
+      //   const res = await axios.get(apiURL);
+      //   const { data } = await res;
+      //   setMusicList(data);
+      //   setLoading(false);
+      //   return data;
+      // } catch (err) {
+      //   // Handle Error Here
+      //   console.error("Error  :   ", err);
+      // }
     };
+    getData();
     // const musics = getData();
     // console.log("List: ", musics);
     // setMusicList(musics);
   }, []);
-  console.log("Music List: ", musicList.songs);
 
+  console.log("Music List: ", musicList.songs);
+  const useStyles = makeStyles({
+    root: {
+      backgroundColor: "#f0e929",
+      height: "120vh",
+    },
+  });
+  const classes = useStyles();
   return (
     // <Grid container spacing={8}>
     //   <Grid item xs={6}>
@@ -22880,7 +22885,7 @@ function App() {
     // </Grid>
 
     <div className="App">
-      <div style={{ backgroundColor: "#f0e929", height: "100vh" }}>
+      <div className={classes.root}>
         <h1>Music App Of HuynhThaoDuyen</h1>
         {loading ? <Loading /> : <Music musics={musicList.songs} />}
       </div>
