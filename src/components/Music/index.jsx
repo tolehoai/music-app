@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import { Container } from "@material-ui/core";
+import { Col, Row } from "react-bootstrap";
 
 Music.propTypes = { musics: PropTypes.object };
 
@@ -93,6 +100,19 @@ function Music(props) {
 
   return (
     <div>
+      <Container>
+        <Row>
+          <Col>1 of 3</Col>
+          <Col xs={6}>2 of 3 (wider)</Col>
+          <Col>3 of 3</Col>
+        </Row>
+        <Row>
+          <Col>1 of 3</Col>
+          <Col xs={5}>2 of 3 (wider)</Col>
+          <Col>3 of 3</Col>
+        </Row>
+      </Container>
+
       <h2>{musics.top100_AM[1].songs[currentMusic.index].title}</h2>
       <h3>{musics.top100_AM[1].songs[currentMusic.index].creator}</h3>
       <img src={musics.top100_AM[1].songs[currentMusic.index].bgImage} alt="" />
