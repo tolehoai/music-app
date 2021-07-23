@@ -45,6 +45,7 @@ function Music(props) {
       audio.play();
     } else audio.pause();
     // audio.play();
+    return console.log("End");
   }, [play]);
 
   // useEffect(() => {
@@ -114,6 +115,10 @@ function Music(props) {
       title: newTitle,
     };
     setPlay(newPlay);
+  };
+
+  const handleEndSong = () => {
+    console.log("End");
   };
 
   const useStyles = makeStyles({
@@ -195,11 +200,15 @@ function Music(props) {
     },
   });
   const classes = useStyles();
+  const myFunction = () => {
+    console.log("End");
+    alert("The video has ended");
+  };
   return (
     <div>
       <Container>
         <Row>
-          <Col xs="4">.col-3</Col>
+          <Col xs="4"></Col>
           <Col xs="4">
             <div className={classes.app_content}>
               <h2>
@@ -233,7 +242,16 @@ function Music(props) {
                 >
                   <SkipPreviousIcon />
                 </button>
-
+                <audio
+                  controls
+                  id="music"
+                  // src={currentMusic.url}
+                  // onended={handleEndSong}
+                  ended="myFunction()"
+                >
+                  {" "}
+                  <source src={currentMusic.url} />
+                </audio>
                 <button
                   onClick={handlePlayClick}
                   className={classes.music_play_button}
@@ -254,7 +272,12 @@ function Music(props) {
                 </button>
               </div>
 
-              <audio id="music" src={currentMusic.url}></audio>
+              {/* <audio
+                controls
+                id="music"
+                src={currentMusic.url}
+                onended={handleEndSong}
+              ></audio> */}
               <h1>
                 <Badge color="secondary">New</Badge>
               </h1>
@@ -269,7 +292,7 @@ function Music(props) {
               </h1>
             </div>
           </Col>
-          <Col xs="4">.col-3</Col>
+          <Col xs="4"></Col>
         </Row>
       </Container>
     </div>
