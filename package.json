@@ -2,7 +2,9 @@
   "name": "music-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/tolehoai/music-app",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
